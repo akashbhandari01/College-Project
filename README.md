@@ -1,4 +1,4 @@
-# 📘 Django Project: [Your Project Name]
+# 📘 Django Project: StudyBuddy
 
 A web application built with the Django framework.
 
@@ -27,8 +27,8 @@ Follow these steps to run this project on your local machine:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/your-django-project.git
-cd your-django-project
+git clone https://github.com/akashbhandari01/College-Project.git
+cd College-Project
 ```
 
 ### 2. Create & Activate Virtual Environment
