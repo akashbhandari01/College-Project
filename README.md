@@ -50,7 +50,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. Change The Settings
+### 4. Change The Settings
 
 Change DEBUG = True
 <br>
