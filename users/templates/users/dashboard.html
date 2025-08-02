@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}{{ user.first_name }} {{ user.last_name }}{% endblock %}
+{% block content %}
+        <!-- Header Start -->
+        <div class="container-fluid bg-primary py-5 mb-5 page-header">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 text-center">
+                        <h1 class="display-3 text-white animated slideInDown">Welcome {{user.first_name}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+         
+    <!-- Dashboard Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Dashboard</h6>
+                <h1 class="mb-5">My Enrolled Courses</h1>
+            </div>
+            <div class="row g-4 justify-content-center">
+            {% if enrolled_courses %}        
+                {% for course in enrolled_courses %}
+                {% for enrollment in enrolled_courses %}
+                <!-- Course Card -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="course-item bg-light">
+                        <div class="position-relative overflow-hidden">
+                            {% comment %} <img class="img-fluid" src="img/course-1.jpg" alt="Course Image"> {% endcomment %}
+                        </div>
+                        <div class="text-center p-4 pb-0">
+                            <h5 class="mb-4">{{ enrollment.course.title }}</h5>
+                        </div>
+                        <div class="p-4 pt-2">
+                             <p class="mb-2">Progress: 75%</p>
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <a href="{% url "courses:course_detail" enrollment.course.id %}" class="btn btn-primary w-100 py-3 mt-4">Continue Learning</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endfor %}
+                {% else %}
+                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="course-item bg-light">
+                        <div class="position-relative overflow-hidden">
+                            {% comment %} <img class="img-fluid" src="img/course-1.jpg" alt="Course Image"> {% endcomment %}
+                        </div>
+                        <div class="text-center p-4 pb-0">
+                            <h5 class="mb-4"></h5>
+                        </div>
+                        <div class="p-4 pt-2">
+                            <p class="mb-2">You have not enrolled in any courses yet.</p>
+                            {% comment %} <a href="{% url 'courses:course_list' %}" class="btn btn-primary w-100 py-3 mt-4">Explore Courses</a> {% endcomment %}
+                    </div>
+                </div>
+                {% endif %}       
+            </div>
+        </div>
+    </div>
+    <!-- Dashboard End -->
+
+{% endblock %}
+
+

@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}{{ course.title }}{% endblock %}
+{% block content %}
+
+<!-- Header Start -->
+<div class="container-fluid bg-primary py-5 mb-5 page-header">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 text-center">
+                        <h1 class="display-3 text-white animated slideInDown">Course</h1>
+                        <nav aria-label="breadcrumb">
+                        </nav>
+                    </div>
+                </div>
+            </div>
+</div>
+<!-- Header End -->
+
+<!-- Course Detail Start -->
+<div class="container-xxl py-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 wow fadeInUp">
+
+                <div class="container">
+                    <div class="row g-5 justify-content-center">
+
+                        <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.3s">
+                            <h2>{{ course.title }}</h2>
+                            <div class="d-flex">
+                            </div>
+                            <div class="image-div text-left mt-3">
+                                <img src="img/testimonial-2.jpg" alt=""
+                                    style="height: 40px; width: 40px; border-radius: 50%;">
+                                <span style="margin-left: 10px;"><b>Instructor Name</b> - {{ course.instructor.username }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="container-fluid wow fadeInUp mt-5 tabs">
+
+
+                    <!-- Tab panes -->
+                    <div class="tab-content mt-4">
+                        <div class="container" id="Curriculum">
+
+                            <h2 class="mt-4">
+                                Syllabus
+                            </h2>
+                            {% if lessons %}
+                            {% for lesson in lessons %}
+                            <div class="accordion accordion-flush" id="accordionFlushExample">
+                                <div class="accordion-item">
+                                  <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                      {{ lesson.order }}: {{ lesson.title }}
+                                    </button>
+                                  </h2>
+                                  <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body"><ul>
+                                        <li><i class="fa fa-video text-danger"></i> Introduction to HTML</li>
+                                        <li><i class="fa fa-video text-danger"></i> HTMl Document Standards</li>
+                                    </ul></div>
+                                  </div>
+                                </div>
+                              </div>
+                              {% endfor %}
+                              {% else %}
+                               <h2 class="accordion-header">
+                                    <p class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                   No lessons added yet for this course.
+                                    </p>
+                                  </h2>
+                              {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            
+            <div class="col-lg-3 col-md-6 shadow wow fadeInUp" data-wow-delay="0.3s">
+
+                {% comment %} <div class="image text-center">
+                </div> {% endcomment %}
+                 {% if not is_enrolled %}
+                <form action="{% url 'courses:enroll_course' course.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class=" text-decoration-none text-white btn p-3 w-100 mb-2 button">ENROLL NOW</button>
+                </form>
+                {% else %}
+                <p class="text-success">You are enrolled in this course!</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Course Detail End -->
+
+{% endblock %}

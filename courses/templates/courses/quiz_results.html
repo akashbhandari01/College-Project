@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}{{ quiz.title }} Results{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2>{{ quiz.title }} Results</h2>
+    <p>Your Score: {{ score }} / {{ total_questions }}</p>
+    <hr>
+
+    {% for result in results %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5>{{ forloop.counter }}. {{ result.question.text }}</h5>
+                {% if result.question.question_type == 'MCQ' %}
+                    <p>Your Answer: 
+                        {% if result.user_answer and result.user_answer.selected_choice %}
+                            <strong>{{ result.user_answer.selected_choice.text }}</strong> 
+                            {% if result.is_correct %}
+                                <span class="badge bg-success">Correct</span>
+                            {% else %}
+                                <span class="badge bg-danger">Incorrect</span>
+                            {% endif %}
+                        {% else %}
+                            <span class="text-muted">No answer provided.</span>
+                        {% endif %}
+                    </p>
+                    <p>Correct Answer: <strong>{{ result.correct_answer }}</strong></p>
+                {% elif result.question.question_type == 'Text' %}
+                    <p>Your Answer: <strong>{{ result.user_answer.text_answer|default:"No answer provided." }}</strong></p>
+                    <p>Correct Answer: <em>(Will be evaluated by instructor)</em></p>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+
+    <p class="mt-4"><a href="{% url 'course_detail' quiz.course.id %}" class="btn btn-secondary">Back to Course</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}{{ quiz.title }}{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2>{{ quiz.title }} <small class="text-muted">({{ course.title }})</small></h2>
+    <p>{{ quiz.description }}</p>
+    <hr>
+
+    <form method="post">
+        {% csrf_token %}
+        {% for question in questions %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ forloop.counter }}. {{ question.text }}</h5>
+                    {% if question.question_type == 'MCQ' %}
+                        {% for choice in question.choices.all %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="question_{{ question.id }}" id="choice_{{ choice.id }}" value="{{ choice.id }}">
+                                <label class="form-check-label" for="choice_{{ choice.id }}">
+                                    {{ choice.text }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    {% elif question.question_type == 'Text' %}
+                        <textarea class="form-control" name="question_{{ question.id }}_text" rows="3" placeholder="Your answer"></textarea>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Submit Quiz</button>
+    </form>
+
+    <p class="mt-4"><a href="{% url 'course_detail' course.id %}" class="btn btn-secondary">Back to Course</a></p>
+</div>
+{% endblock %}
