@@ -14,9 +14,8 @@ A web application built with the Django framework.
 
 - Python
 - Django
-- SQLite / PostgreSQL / MySQL
+- SQLite 
 - HTML, CSS, JavaScript, Bootstrap
-- [Other tools/libraries used]
 
 ---
 
