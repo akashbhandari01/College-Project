@@ -86,13 +86,9 @@ Login with your superuser credentials.
 
 ---
 
-## 📄 License
 
-This project is licensed under the [MIT License](LICENSE).
-
----
 
 ## 🙌 Acknowledgements
 
 - Django Documentation: https://docs.djangoproject.com/
-- [List any other tools, templates, or contributors]
+
