@@ -60,10 +60,6 @@
                                     </button>
                                   </h2>
                                   <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body"><ul>
-                                        <li><i class="fa fa-video text-danger"></i> Introduction to HTML</li>
-                                        <li><i class="fa fa-video text-danger"></i> HTMl Document Standards</li>
-                                    </ul></div>
                                   </div>
                                 </div>
                               </div>
@@ -89,6 +85,7 @@
                  {% if not is_enrolled %}
                 <form action="{% url 'courses:enroll_course' course.id %}" method="post">
                     {% csrf_token %}
+                    <input type="hidden" name="course_id" value="{{ course.id }}">
                     <button type="submit" class=" text-decoration-none text-white btn p-3 w-100 mb-2 button">ENROLL NOW</button>
                 </form>
                 {% else %}
